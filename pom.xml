@@ -14,7 +14,7 @@
   </modules>
 
   <properties>
-    <bigdatakit.sdk.version>1.0-SNAPSHOT</bigdatakit.sdk.version>
+    <bigdatakit.sdk.version>1.0.0</bigdatakit.sdk.version>
   </properties>
 
   <repositories>
