@@ -1,6 +1,6 @@
 package com.sogou.bigdatakit.example.hive.etl
 
-import com.sogou.bigdatakit.hive.etl.ETLProcessor
+import com.sogou.bigdatakit.hive.etl.processor.ETLProcessor
 import org.apache.hadoop.io.{LongWritable, Text}
 import org.apache.hadoop.mapred.TextInputFormat
 import org.apache.spark.sql.DataFrame
