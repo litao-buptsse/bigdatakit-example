@@ -1,64 +1,128 @@
-# BigdataKit-Example-Hive
+# Build Hive Data Warehouse with BigdataKit
 
 ---
 
-## Building & Running
+## Type-1: Load Data By ETL Job
 
-Please refer to [BigdataKit-Example README](http://gitlab.dev.sogou-inc.com/sogou-spark/bigdatakit-example/blob/master/README.md)
+### 1. Create Table
 
-
-## Implementation
-
-Write your own Processor class implements ETLProcessor class, and implements method doETL(). Package your jar and use bigdatakit etl to submit your job.
+#### a. write table spec file
 
 ```
-class ImeAndroidDBGETLProcessor extends ETLProcessor {
+$ cat mytb.conf
+table = mytb
+fields = [
+  { name: channel, type: string }
+  { name: pv, type: long }
+]
+```
 
-  case class ImeAndroidDBG(app: String, query: String, st: Int)
+#### b. create table
 
+```
+$ bigdatakit create-table mytb.conf
+```
+
+### 2. Build ETL Process
+
+#### a. git clone bigdatakit-startup project
+
+```
+$ git clone git@gitlab.dev.sogou-inc.com:sogou-spark/bigdatakit-startup.git
+```
+
+#### b. config artifactId in pom.xml (important)
+
+* e.g. artifactId: mytb-etl
+
+#### c. extend ETLProcessor class
+
+```
+package com.sogou.bigdatakit.example.hive.etl
+
+class ExampleETLProcessor extends ETLProcessor {
   override def doETL(sqlContext: HiveContext, database: String, table: String, logdate: String): DataFrame = {
-    val input = s"/logdata/for_ime/AndroidDBG1week/$logdate/*.gz"
-
-    import sqlContext.implicits._
-
-    sqlContext.sparkContext.
-      hadoopFile(input, classOf[TextInputFormat], classOf[LongWritable], classOf[Text]).
-      map(pair => new String(pair._2.getBytes, "GBK")).
-      filter(_.startsWith("st")).map { line =>
-      val arr = line.split("\t")
-      if (arr.length == 4 && Seq("0", "1", "2").contains(arr(3))) {
-        new ImeAndroidDBG(arr(2), arr(1), arr(3).toInt)
-      } else {
-        null
-      }
-    }.filter(_ != null).toDF()
+    sqlContext.sql(s"select channel, count(*) as pv from custom.common_pc_pv where logdate='{$logdate}' group by channel")
   }
 }
 ```
 
-## Usage
-
-### Command
+#### d. make docker image
 
 ```
-Usage: bigdatakit etl <jar> <logdate> [options]
+$ make docker-push
 ```
 
-### Options
-
+#### e. docker run command (timely scheduled by DTE)
 ```
--Dmaster=<url>            specify the Spark run mode, "local[*]" or "yarn-client"
--Dname=<name>             specify the name of Spark application
--Dname=<database>         specify the database
--Dname=<table>            specify the table
--Dprocessor=<class>       specify the processor class
+$ docker run --rm --net=host -v /root/ugi_config:/root/ugi_config \
+    registry.docker.dev.sogou-inc.com:5000/bigdatakitapp/mytb-etl:1.0 bigdatakit etl \
+    -Dtable=mytb -Dprocessor=com.sogou.bigdatakit.example.hive.etl.ExampleETLProcessor \
+    mytb-etl-1.0.jar <logdate>
 ```
 
-### Example: Running etl job
+---
+
+## Type-2: Add Serde On Existing Raw Log (no data copy)
+
+### 1. Build Serde Package
+
+#### a. git clone bigdatakit-startup project
 
 ```
-$ bigdatakit etl \
-    bigdatakit-example-hive-1.0-SNAPSHOT.jar 20160104 \
-    -Ddatabase=custom -Dtable=ime_anadroid_dbg \
-    -Dprocessor=com.sogou.bigdatakit.example.hive.etl.ImeAndroidDBGETLProcessor
+$ git clone git@gitlab.dev.sogou-inc.com:sogou-spark/bigdatakit-startup.git
 ```
+
+#### b. config artifactId in pom.xml (important)
+
+* e.g. artifactId: mytb2-serde
+
+#### c. extend TextDeserializer class
+
+```
+package com.sogou.bigdatakit.example.hive.serde;
+
+public class ExampleDeserializer extends TextDeserializer {
+  @Override
+  public List<Object> deserialize(String line, List<Object> reuse) {
+    String[] array = line.split(" ");
+    reuse.add(0, array[0]);
+    reuse.add(1, Integer.parseInt(array[1]));
+    return reuse;
+  }
+}
+```
+
+#### d. build serde package
+
+```
+$ make
+```
+
+#### e. publish serde package
+
+```
+$ bigdatakit publish-package com.sogou.bigdatakit.app:mytb2-serde:1.0 target/mytb2-serde-1.0.jar
+```
+
+### 2. Create Table
+
+#### a. write table spec file
+
+```
+$ cat mytb2.conf
+table = mytb2
+fields = [
+  { name: f1, type: string }
+  { name: f2, type: int }
+]
+serde: com.sogou.bigdatakit.example.hive.serde.ExampleDeserializer
+```
+
+#### b. create table
+
+```
+$ bigdatakit create-table mytb2.conf -Dpackages=com.sogou.bigdatakit.app:mytb2-serde:1.0
+```
+
+### 3. auto timely add partition by DTE
