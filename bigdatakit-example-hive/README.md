@@ -25,17 +25,13 @@ $ bigdatakit create-table mytb.conf
 
 ### 2. Build ETL Process
 
-#### a. git clone bigdatakit-startup project
+#### a. generate project
 
 ```
-$ git clone git@gitlab.dev.sogou-inc.com:sogou-spark/bigdatakit-startup.git
+$ bigdatakit generate-project mytb-etl
 ```
 
-#### b. config artifactId in pom.xml (important)
-
-* e.g. artifactId: mytb-etl
-
-#### c. extend ETLProcessor class
+#### b. extend ETLProcessor class
 
 ```
 package com.sogou.bigdatakit.example.hive.etl
@@ -47,13 +43,13 @@ class ExampleETLProcessor extends ETLProcessor {
 }
 ```
 
-#### d. make docker image
+#### c. make docker image
 
 ```
 $ make docker-push
 ```
 
-#### e. docker run command (timely scheduled by DTE)
+#### d. docker run command (timely scheduled by DTE)
 ```
 $ docker run --rm --net=host -v /root/ugi_config:/root/ugi_config \
     registry.docker.dev.sogou-inc.com:5000/bigdatakitapp/mytb-etl:1.0 bigdatakit etl \
@@ -67,17 +63,13 @@ $ docker run --rm --net=host -v /root/ugi_config:/root/ugi_config \
 
 ### 1. Build Serde Package
 
-#### a. git clone bigdatakit-startup project
+#### a. generate project
 
 ```
-$ git clone git@gitlab.dev.sogou-inc.com:sogou-spark/bigdatakit-startup.git
+$ bigdatakit generate-project mytb2-serde
 ```
 
-#### b. config artifactId in pom.xml (important)
-
-* e.g. artifactId: mytb2-serde
-
-#### c. extend TextDeserializer class
+#### b. extend TextDeserializer class
 
 ```
 package com.sogou.bigdatakit.example.hive.serde;
@@ -93,13 +85,13 @@ public class ExampleDeserializer extends TextDeserializer {
 }
 ```
 
-#### d. build serde package
+#### c. build serde package
 
 ```
 $ make
 ```
 
-#### e. publish serde package
+#### d. publish serde package
 
 ```
 $ bigdatakit publish-package com.sogou.bigdatakit.app:mytb2-serde:1.0 target/mytb2-serde-1.0.jar
