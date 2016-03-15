@@ -31,12 +31,12 @@ $ bigdatakit create-table mytb.conf
 $ bigdatakit generate-project mytb-etl
 ```
 
-#### b. extend ETLProcessor class
+#### b. extend HiveETLProcessor class
 
 ```
 package com.sogou.bigdatakit.example.hive.etl
 
-class ExampleETLProcessor extends ETLProcessor {
+class ExampleHiveETLProcessor extends HiveETLProcessor {
   override def doETL(sqlContext: HiveContext, database: String, table: String, logdate: String): DataFrame = {
     sqlContext.sql(s"select channel, count(*) as pv from custom.common_pc_pv where logdate='{$logdate}' group by channel")
   }
@@ -53,7 +53,7 @@ $ make docker-push
 ```
 $ docker run --rm --net=host -v /root/ugi_config:/root/ugi_config \
     registry.docker.dev.sogou-inc.com:5000/bigdatakitapp/mytb-etl:1.0 bigdatakit etl \
-    -Dtable=mytb -Dprocessor=com.sogou.bigdatakit.example.hive.etl.ExampleETLProcessor \
+    -Dtable=mytb -Dprocessor=com.sogou.bigdatakit.example.hive.etl.ExampleHiveETLProcessor`` \
     mytb-etl-1.0.jar <logdate>
 ```
 

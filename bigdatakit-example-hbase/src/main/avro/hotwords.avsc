@@ -1,0 +1,19 @@
+{
+  "namespace": "com.sogou.bigdatakit.example.hbase.etl.avro",
+  "type": "record",
+  "name": "Hotwords",
+  "fields": [
+    {
+      "name": "pid",
+      "type": "string"
+    },
+    {
+      "name": "query",
+      "type": "string"
+    },
+    {
+      "name": "pv",
+      "type": "long"
+    }
+  ]
+}
