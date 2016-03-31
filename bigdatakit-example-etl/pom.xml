@@ -12,7 +12,7 @@
   </parent>
 
   <groupId>com.sogou.bigdatakit</groupId>
-  <artifactId>bigdatakit-example-hbase</artifactId>
+  <artifactId>bigdatakit-example-etl</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>

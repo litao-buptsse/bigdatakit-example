@@ -1,7 +1,6 @@
 package com.sogou.bigdatakit.example.hive.serde;
 
 import com.sogou.bigdatakit.hive.serde.TextDeserializer;
-import org.apache.hadoop.hive.serde2.SerDeException;
 import org.apache.hadoop.io.Text;
 
 import java.util.ArrayList;

@@ -1,5 +1,5 @@
 {
-  "namespace": "com.sogou.bigdatakit.example.hbase.etl.avro",
+  "namespace": "com.sogou.bigdatakit.example.etl.hbase.avro",
   "type": "record",
   "name": "Hotwords",
   "fields": [

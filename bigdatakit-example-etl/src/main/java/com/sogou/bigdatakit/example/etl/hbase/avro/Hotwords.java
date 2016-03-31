@@ -3,14 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.sogou.bigdatakit.example.hbase.etl.avro;
-
-import java.io.Serializable;
-
+package com.sogou.bigdatakit.example.etl.hbase.avro;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
-public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord, Serializable {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hotwords\",\"namespace\":\"com.sogou.bigdatakit.example.hbase.etl.avro\",\"fields\":[{\"name\":\"pid\",\"type\":\"string\"},{\"name\":\"query\",\"type\":\"string\"},{\"name\":\"pv\",\"type\":\"long\"}]}");
+public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hotwords\",\"namespace\":\"com.sogou.bigdatakit.example.etl.hbase.avro\",\"fields\":[{\"name\":\"pid\",\"type\":\"string\"},{\"name\":\"query\",\"type\":\"string\"},{\"name\":\"pv\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence pid;
   @Deprecated public java.lang.CharSequence query;
@@ -99,18 +96,18 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /** Creates a new Hotwords RecordBuilder */
-  public static com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder newBuilder() {
-    return new com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder();
+  public static com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder newBuilder() {
+    return new com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder();
   }
   
   /** Creates a new Hotwords RecordBuilder by copying an existing Builder */
-  public static com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder newBuilder(com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder other) {
-    return new com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder(other);
+  public static com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder newBuilder(com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder other) {
+    return new com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder(other);
   }
   
   /** Creates a new Hotwords RecordBuilder by copying an existing Hotwords instance */
-  public static com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder newBuilder(com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords other) {
-    return new com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder(other);
+  public static com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder newBuilder(com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords other) {
+    return new com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder(other);
   }
   
   /**
@@ -125,11 +122,11 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.SCHEMA$);
+      super(com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder other) {
+    private Builder(com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.pid)) {
         this.pid = data().deepCopy(fields()[0].schema(), other.pid);
@@ -146,8 +143,8 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Creates a Builder by copying an existing Hotwords instance */
-    private Builder(com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords other) {
-            super(com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.SCHEMA$);
+    private Builder(com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords other) {
+            super(com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.SCHEMA$);
       if (isValidValue(fields()[0], other.pid)) {
         this.pid = data().deepCopy(fields()[0].schema(), other.pid);
         fieldSetFlags()[0] = true;
@@ -168,7 +165,7 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Sets the value of the 'pid' field */
-    public com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder setPid(java.lang.CharSequence value) {
+    public com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder setPid(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.pid = value;
       fieldSetFlags()[0] = true;
@@ -181,7 +178,7 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'pid' field */
-    public com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder clearPid() {
+    public com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder clearPid() {
       pid = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -193,7 +190,7 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Sets the value of the 'query' field */
-    public com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder setQuery(java.lang.CharSequence value) {
+    public com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder setQuery(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.query = value;
       fieldSetFlags()[1] = true;
@@ -206,7 +203,7 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'query' field */
-    public com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder clearQuery() {
+    public com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder clearQuery() {
       query = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -218,7 +215,7 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Sets the value of the 'pv' field */
-    public com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder setPv(long value) {
+    public com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder setPv(long value) {
       validate(fields()[2], value);
       this.pv = value;
       fieldSetFlags()[2] = true;
@@ -231,7 +228,7 @@ public class Hotwords extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'pv' field */
-    public com.sogou.bigdatakit.example.hbase.etl.avro.Hotwords.Builder clearPv() {
+    public com.sogou.bigdatakit.example.etl.hbase.avro.Hotwords.Builder clearPv() {
       fieldSetFlags()[2] = false;
       return this;
     }

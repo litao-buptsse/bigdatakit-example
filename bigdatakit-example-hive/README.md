@@ -53,7 +53,7 @@ $ make docker-push
 ```
 $ docker run --rm --net=host -v /root/ugi_config:/root/ugi_config \
     registry.docker.dev.sogou-inc.com:5000/bigdatakitapp/mytb-etl:1.0 bigdatakit etl \
-    -Dtable=mytb -Dprocessor=com.sogou.bigdatakit.example.hive.etl.ExampleHiveETLProcessor`` \
+    -Dtable=mytb -Dprocessor=com.sogou.bigdatakit.example.etl.hive.ExampleHiveETLProcessor`` \
     mytb-etl-1.0.jar <logdate>
 ```
 

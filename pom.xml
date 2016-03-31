@@ -12,7 +12,7 @@
   <modules>
     <module>bigdatakit-example-spark-streaming</module>
     <module>bigdatakit-example-hive</module>
-    <module>bigdatakit-example-hbase</module>
+    <module>bigdatakit-example-etl</module>
   </modules>
 
   <properties>
