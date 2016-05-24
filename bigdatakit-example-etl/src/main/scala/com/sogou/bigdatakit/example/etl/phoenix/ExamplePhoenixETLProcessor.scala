@@ -10,7 +10,7 @@ class ExamplePhoenixETLProcessor extends PhoenixTransformer {
   override def transform(sqlContext: HiveContext, logdate: String) = {
     sqlContext.sql(
       s"""
-         |select ip, '$logdate' as logdate, count(*) as pv
+         |select ip, count(*) as pv
          |from custom.common_wap_pv
          |where logdate='${logdate}'
          |group by ip

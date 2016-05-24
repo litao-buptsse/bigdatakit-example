@@ -20,7 +20,7 @@
     <java.version>1.7</java.version>
     <scala.version>2.10.4</scala.version>
     <spark.version>1.5.0</spark.version>
-    <bigdatakit.sdk.version>1.0.0</bigdatakit.sdk.version>
+    <bigdatakit.version>1.1.0</bigdatakit.version>
 
     <PermGen>64m</PermGen>
     <MaxPermGen>512m</MaxPermGen>
@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.sogou.bigdatakit</groupId>
       <artifactId>bigdatakit-sdk</artifactId>
-      <version>${bigdatakit.sdk.version}</version>
+      <version>${bigdatakit.version}</version>
     </dependency>
   </dependencies>
 
