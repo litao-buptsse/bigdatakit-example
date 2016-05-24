@@ -7,8 +7,6 @@ import org.apache.spark.sql.hive.HiveContext
   * Created by Tao Li on 2016/3/31.
   */
 class ExamplePhoenixETLProcessor2 extends PhoenixRunner {
-
-
   override def run(sqlContext: HiveContext, logdate: String) = {
     val df = sqlContext.sql(
       s"""
