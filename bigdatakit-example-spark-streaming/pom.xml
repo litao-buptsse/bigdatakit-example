@@ -14,4 +14,12 @@
   <groupId>com.sogou.bigdatakit</groupId>
   <artifactId>bigdatakit-example-spark-streaming</artifactId>
   <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+  </dependencies>
 </project>

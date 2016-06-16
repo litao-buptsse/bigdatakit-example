@@ -5,18 +5,18 @@ import com.sogou.bigdatakit.streaming.processor.LineProcessor;
 /**
  * Created by Tao Li on 11/24/15.
  */
-public class EchoLineProcessor implements LineProcessor {
+public class EchoJavaLineProcessor extends LineProcessor {
+  @Override
+  public void beforeBatch() {
+    System.out.println("before batch ...");
+  }
 
-  public void init() {
-    System.out.println("init...");
+  @Override
+  public void afterBatch() {
+    System.out.println("after batch ...");
   }
 
   public void process(String message) {
     System.out.println("process: " + message);
-
-  }
-
-  public void close() {
-    System.out.println("close...");
   }
 }
